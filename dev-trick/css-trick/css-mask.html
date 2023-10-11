@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: grid;
+        place-content: center;
+      }
+      .prew {
+        display: block;
+        width: 800px;
+      }
+      .wrap {
+        position: relative;
+        overflow: hidden;
+      }
+      .wrap::after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        /* 计算位置即可 */
+        left: calc(var(--x, 0.5) * 100%);
+        top: calc(var(--y, 0.5) * 100%);
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 0 999vw rgba(0, 0, 0, 0.5); /*足够大的投影*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="img">
+      <img
+        class="prew"
+        src="https://raw.githubusercontent.com/XboxYan/tuchuang/main/img/1460000042643911.jpeg"
+      />
+    </div>
+
+    <script>
+      const img = document.querySelector(".wrap");
+      console.log(img);
+      img.addEventListener("mousemove", (ev) => {
+        // 根据鼠标位置进行计算位置
+        img.style.setProperty("--x", ev.offsetX / ev.target.offsetWidth);
+        img.style.setProperty("--y", ev.offsetY / ev.target.offsetHeight);
+      });
+    </script>
+  </body>
+</html>
